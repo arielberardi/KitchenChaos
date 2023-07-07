@@ -47,6 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 7
   _rotationSpeed: 10
+  _height: 2
+  _radious: 0.7
+  _interactDistance: 2
+  _gameInput: {fileID: 0}
+  _counterLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &8788984461790609998
 PrefabInstance:
   m_ObjectHideFlags: 0
