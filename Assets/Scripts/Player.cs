@@ -24,46 +24,23 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Vector2 inputVector = _gameInput.GetInputVector();
-
         Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
-        float moveDistance = _speed * Time.deltaTime;
 
-        bool canMove = !Physics.CapsuleCast(
-            transform.position,
-            transform.position + Vector3.up * _height,
-            _radious,
-            moveDirection,
-            moveDistance
-        );
-
+        bool canMove = getCanMove(moveDirection);
         if (!canMove)
         {
-            // Retry on X direction
-            Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(
-                transform.position,
-                transform.position + Vector3.up * _height,
-                _radious,
-                moveDirectionX,
-                moveDistance
-            );
-            
+            Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0);
+
+            canMove = getCanMove(moveDirectionX);
             if (canMove)
             {
                 moveDirection = moveDirectionX;
             }
-            else 
+            else
             {
-                // Retry on Z direction
-                Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z).normalized  ;
-                canMove = !Physics.CapsuleCast(
-                    transform.position,
-                    transform.position + Vector3.up * _height,
-                    _radious,
-                    moveDirectionZ,
-                    moveDistance
-                );
-                
+                Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z);
+
+                canMove = getCanMove(moveDirectionZ);
                 if (canMove)
                 {
                     moveDirection = moveDirectionZ;
@@ -73,7 +50,7 @@ public class Player : MonoBehaviour
 
         if (canMove)
         {
-            transform.position += moveDistance * moveDirection;
+            transform.position += _speed * Time.deltaTime * moveDirection.normalized;
         }
 
         transform.forward = Vector3.Slerp(
@@ -88,5 +65,16 @@ public class Player : MonoBehaviour
     public bool isWalking()
     {
         return _isWalking;
+    }
+
+    private bool getCanMove(Vector3 direction)
+    {
+        return !Physics.CapsuleCast(
+            transform.position,
+            transform.position + Vector3.up * _height,
+            _radious,
+            direction,
+            _speed * Time.deltaTime
+        );
     }
 }
