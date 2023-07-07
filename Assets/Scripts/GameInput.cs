@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {   
     public event EventHandler OnInteractEvent;
+    
     private PlayerInputActions _playerInputActions;
     
     private void Awake()
