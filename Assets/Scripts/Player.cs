@@ -15,10 +15,15 @@ public class Player : MonoBehaviour
     private bool _isWalking = false;
     private Vector3 lastInteractDirection = Vector3.zero;
 
+    private void Start() 
+    {
+        _gameInput.OnInteractEvent += GameInputOnInteractAction;
+    }
+
     private void Update()
     {
         HandleMovements();
-        HandleInteractions();
+        // HandleInteractions();
     }
 
     public bool GetIsWalking()
@@ -106,7 +111,12 @@ public class Player : MonoBehaviour
         }
         
         if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-            clearCounter.Interact();   
+            clearCounter.Interact();    
         }   
+    }
+    
+    private void GameInputOnInteractAction(object sender, System.EventArgs e)
+    {
+        HandleInteractions();
     }
 }
