@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter, IKitchenObjectParent
 {
-    [SerializeField] private Transform _kitchenObjectTransform;
+    [SerializeField] private KitchenObjectSO _kitchenObjectSO;
     
     public override void Interact(Player player)
     {

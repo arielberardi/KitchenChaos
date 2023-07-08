@@ -44,6 +44,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractAlternate"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd04b487-2e39-4028-8810-6a169e6cd6de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1622a6ed-4d67-4002-b5e2-860ba33210ae"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e62161e6-1f11-400c-a99a-fe0a5e2a6f4b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractAlternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fd7a9fd-a930-4216-bf70-49331f9dec78"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractAlternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -188,6 +230,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_InteractAlternate = m_Player.FindAction("InteractAlternate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,12 +294,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_InteractAlternate;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @InteractAlternate => m_Wrapper.m_Player_InteractAlternate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +317,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @InteractAlternate.started += instance.OnInteractAlternate;
+            @InteractAlternate.performed += instance.OnInteractAlternate;
+            @InteractAlternate.canceled += instance.OnInteractAlternate;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -282,6 +330,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @InteractAlternate.started -= instance.OnInteractAlternate;
+            @InteractAlternate.performed -= instance.OnInteractAlternate;
+            @InteractAlternate.canceled -= instance.OnInteractAlternate;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -303,5 +354,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInteractAlternate(InputAction.CallbackContext context);
     }
 }

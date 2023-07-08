@@ -82,6 +82,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7809976347632975067, guid: 8c4e39e47f8064da9bc8c5b18c81a13b,
         type: 3}
+      propertyPath: _kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c212a5c22b6874f2e86558b991888f5d,
+        type: 2}
+    - target: {fileID: 7809976347632975067, guid: 8c4e39e47f8064da9bc8c5b18c81a13b,
+        type: 3}
       propertyPath: _kitchenObjectTransform
       value: 
       objectReference: {fileID: 7043729645258472425, guid: 4ab3e3898735e48a2b87ce2d82c50354,

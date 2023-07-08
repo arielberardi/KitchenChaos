@@ -66,8 +66,14 @@ PrefabInstance:
     - target: {fileID: 3790973229181968934, guid: 8c4e39e47f8064da9bc8c5b18c81a13b,
         type: 3}
       propertyPath: m_Name
-      value: ContainerCounter
+      value: CheeseBlockContainerCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 7809976347632975067, guid: 8c4e39e47f8064da9bc8c5b18c81a13b,
+        type: 3}
+      propertyPath: _kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 31cc7d9be8fb244c6b8af6d1677f508e,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

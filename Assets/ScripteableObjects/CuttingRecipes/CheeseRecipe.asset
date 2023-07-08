@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ef73264709c45ebb163be92d46d3b9, type: 3}
-  m_Name: Cabbage
+  m_Script: {fileID: 11500000, guid: b57d64ad051ab41548f98d980fc757f5, type: 3}
+  m_Name: CheeseRecipe
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: e1c23b5aded59d84da30738d3267a6c9, type: 3}
-  objectName: Cabbage
+  input: {fileID: 11400000, guid: 31cc7d9be8fb244c6b8af6d1677f508e, type: 2}
+  output: {fileID: 11400000, guid: 7be7cb67c6e4e4510804a853bbe9de87, type: 2}

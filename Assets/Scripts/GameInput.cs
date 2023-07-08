@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {   
-    public event EventHandler OnInteractEvent;
+    public event EventHandler OnInteractAction;
+    public event EventHandler OnInteractAlternateAction;
     
     private PlayerInputActions _playerInputActions;
     
@@ -14,7 +16,8 @@ public class GameInput : MonoBehaviour
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.Player.Enable();
         
-        _playerInputActions.Player.Interact.performed += InteractPerformed;
+        _playerInputActions.Player.Interact.performed += Interact_OnPerformed;
+        _playerInputActions.Player.InteractAlternate.performed += InteractAlternate_OnPerformed;
     }
     
     public Vector2 GetInputVector()
@@ -22,11 +25,19 @@ public class GameInput : MonoBehaviour
         return _playerInputActions.Player.Move.ReadValue<Vector2>();
     }
     
-    private void InteractPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj) 
+    private void Interact_OnPerformed(InputAction.CallbackContext obj) 
     {
-        if (OnInteractEvent != null) 
+        if (OnInteractAction != null) 
         {
-            OnInteractEvent(this, EventArgs.Empty);
+            OnInteractAction(this, EventArgs.Empty);
+        }
+    }
+    
+    private void InteractAlternate_OnPerformed(InputAction.CallbackContext obj) 
+    {
+        if (OnInteractAlternateAction != null) 
+        {
+            OnInteractAlternateAction(this, EventArgs.Empty);
         }
     }
 }

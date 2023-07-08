@@ -35,7 +35,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Start() 
     {
-        _gameInput.OnInteractEvent += GameInput_OnInteractAction;
+        _gameInput.OnInteractAction += GameInput_OnInteractAction;
+        _gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
     private void Update()
@@ -56,6 +57,14 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             _counterSelected.Interact(this);
         }
     }
+    
+    private void GameInput_OnInteractAlternateAction(object sender, System.EventArgs e)
+    {
+        if (_counterSelected != null)
+        {
+            _counterSelected.InteractAlternate(this);
+        }
+    }
 
     private void HandleMovements()
     {
@@ -65,7 +74,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         if (!canMove)
         {
             Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0);
-            canMove = !GetIsCastIntercepted(moveDirectionX);
+            canMove = moveDirectionX.x != 0 && !GetIsCastIntercepted(moveDirectionX);
             
             // Attemp movement on X axis
             if (canMove)
@@ -75,7 +84,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             else
             {
                 Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z);
-                canMove = !GetIsCastIntercepted(moveDirectionZ);
+                canMove = moveDirectionZ.z != 0 && !GetIsCastIntercepted(moveDirectionZ);
                 
                 // Attemp movement on Z axis
                 if (canMove)
