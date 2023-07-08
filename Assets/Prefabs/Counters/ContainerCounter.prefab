@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectSpawnPoint: {fileID: 3664088406477600247}
-  _kitchenObjectTransform: {fileID: 0}
+  _kitchenObjectTransform: {fileID: 7043729645258472425, guid: e3ba6908a4f494cf1829a5a37a701ea1,
+    type: 3}
 --- !u!1001 &2941200325662748595
 PrefabInstance:
   m_ObjectHideFlags: 0

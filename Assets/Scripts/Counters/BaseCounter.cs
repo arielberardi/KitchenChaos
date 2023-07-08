@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
-    [SerializeField] private Transform _objectSpawnPoint; // TODO: We need to check we can get internaly without referencing
+    [SerializeField] private Transform _objectSpawnPoint;
     
     private KitchenObject _kitchenObject;
     

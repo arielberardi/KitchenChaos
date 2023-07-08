@@ -11,6 +11,11 @@ public class ContainerCounter : BaseCounter, IKitchenObjectParent
 
     public override void Interact(Player player)
     {
+        if (player.HasKitchenObject())
+        {
+            return;
+        }
+        
         Transform objectTransform = Instantiate(_kitchenObjectTransform);
         objectTransform.GetComponent<KitchenObject>().SetParent(player);
         
