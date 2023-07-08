@@ -63,8 +63,9 @@ public class Player : MonoBehaviour
         if (!canMove)
         {
             Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0);
-
             canMove = !GetIsCastIntercepted(moveDirectionX);
+            
+            // Attemp movement on X axis
             if (canMove)
             {
                 moveDirection = moveDirectionX;
@@ -72,8 +73,9 @@ public class Player : MonoBehaviour
             else
             {
                 Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z);
-
                 canMove = !GetIsCastIntercepted(moveDirectionZ);
+                
+                // Attemp movement on Z axis
                 if (canMove)
                 {
                     moveDirection = moveDirectionZ;
@@ -111,22 +113,13 @@ public class Player : MonoBehaviour
             _counterLayerMask
         );
         
-        if (!isInteracting) 
+        ClearCounter clearCounter = null;
+        if (isInteracting) 
         {
-            SetCounterSelected(null);
-            return;
+            raycastHit.transform.TryGetComponent(out clearCounter);
         }
-        
-        if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-            if (clearCounter != _counterSelected) 
-            {
-                SetCounterSelected(clearCounter);
-            }   
-        }  
-        else 
-        {
-            SetCounterSelected(null);
-        } 
+
+        UpdateSelectedCounter(clearCounter);
     }
     
     private bool GetIsCastIntercepted(Vector3 direction)
@@ -143,11 +136,16 @@ public class Player : MonoBehaviour
     private Vector3 GetMoveDirection()
     {
         Vector2 inputVector = _gameInput.GetInputVector();
-        return new Vector3(inputVector.x, 0, inputVector.y);
+        return new Vector3(inputVector.x, 0, inputVector.y).normalized;
     }
 
-    private void SetCounterSelected(ClearCounter counterSelected)
+    private void UpdateSelectedCounter(ClearCounter counterSelected)
     {
+        if (_counterSelected == counterSelected)
+        {
+            return;
+        }
+        
         _counterSelected = counterSelected;
                 
         if (OnSelectedCounterChanged != null) 
