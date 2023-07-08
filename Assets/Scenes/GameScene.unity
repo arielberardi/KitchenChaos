@@ -145,9 +145,20 @@ PrefabInstance:
         type: 3}
     - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
+      propertyPath: _objectTransform
+      value: 
+      objectReference: {fileID: 7043729645258472425, guid: e3ba6908a4f494cf1829a5a37a701ea1,
+        type: 3}
+    - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+        type: 3}
       propertyPath: _objectSpawnPoint
       value: 
       objectReference: {fileID: 1628189378}
+    - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+        type: 3}
+      propertyPath: _secondClearCounter
+      value: 
+      objectReference: {fileID: 1269349945}
     - target: {fileID: 2470063744207663735, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
       propertyPath: m_RootOrder
@@ -166,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 2470063744207663735, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 3.41
       objectReference: {fileID: 0}
     - target: {fileID: 2470063744207663735, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
@@ -616,6 +627,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!114 &583467686 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 263205805}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d7ddb6a1f5d456fbd14938ae037b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +738,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269349945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1348962603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d7ddb6a1f5d456fbd14938ae037b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1348962603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -737,9 +772,20 @@ PrefabInstance:
         type: 3}
     - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
+      propertyPath: _objectTransform
+      value: 
+      objectReference: {fileID: 7043729645258472425, guid: e3516b1592ca84921846af028ccc2dcf,
+        type: 3}
+    - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+        type: 3}
       propertyPath: _objectSpawnPoint
       value: 
       objectReference: {fileID: 1078742116}
+    - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
+        type: 3}
+      propertyPath: _secondClearCounter
+      value: 
+      objectReference: {fileID: 583467686}
     - target: {fileID: -1017740242124917343, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
       propertyPath: _kitchenObjectPrefab
@@ -764,7 +810,7 @@ PrefabInstance:
     - target: {fileID: 2470063744207663735, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 3.46
       objectReference: {fileID: 0}
     - target: {fileID: 2470063744207663735, guid: c6b3f130852c147ddbcd4c458850cafd,
         type: 3}

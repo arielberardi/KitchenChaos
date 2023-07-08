@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
-    // Review this, it has a circula reference between KitchenObjectSO -> Prefab and Prefab -> KitchenObjectSO
     [SerializeField] private KitchenObjectSO _kitchenObjectSO;
+    
+    private IKitchenObjectParent _parent;
     
     public Sprite GetSprite() 
     {
@@ -20,5 +21,29 @@ public class KitchenObject : MonoBehaviour
     public Transform GetTransform()
     {
         return transform;
+    }
+    
+    public void SetParent(IKitchenObjectParent parent)
+    {
+        if (_parent != null)
+        {
+            _parent.ClearKitchenObject();
+        }
+        
+        _parent = parent;
+        if (_parent.HasKitchenObject())
+        {
+            Debug.LogError("IKitchenObjectParent already has a KitchenObject");
+        }
+        
+        _parent.SetKitchenObject(this);
+        
+        transform.parent = _parent.GetObjectSpawnPoint();
+        transform.localPosition = Vector3.zero;
+    }
+    
+    public IKitchenObjectParent GetParent()
+    {
+        return _parent;
     }
 }

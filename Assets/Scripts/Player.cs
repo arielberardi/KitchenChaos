@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] private float _speed = 7.0f;
     [SerializeField] private float _rotationSpeed = 10.0f;
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _interactDistance = 2.0f;
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private LayerMask _counterLayerMask;
+    [SerializeField] private Transform _objectSpawnPoint;
     
     public static Player Instance { get; private set; }
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     private bool _isWalking = false;
     private Vector3 lastInteractDirection = Vector3.zero;
     private ClearCounter _counterSelected;
+    private KitchenObject _kitchenObject;
 
     private void Awake() {
         if (Instance != null) {
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
     {
         if (_counterSelected != null)
         {
-            _counterSelected.Interact();
+            _counterSelected.Interact(this);
         }
     }
 
@@ -87,14 +89,16 @@ public class Player : MonoBehaviour
         {
             transform.position += _speed * Time.deltaTime * moveDirection.normalized;
         }
-
-        transform.forward = Vector3.Slerp(
-            transform.forward,
-            moveDirection,
-            Time.deltaTime * _rotationSpeed
-        );
-
+    
         _isWalking = moveDirection != Vector3.zero;
+        if (_isWalking)
+        {
+            transform.forward = Vector3.Slerp(
+                transform.forward,
+                moveDirection,
+                Time.deltaTime * _rotationSpeed
+            );
+        }
     }
 
     private void HandleInteractions()
@@ -154,5 +158,30 @@ public class Player : MonoBehaviour
                 selectedCounter = _counterSelected
             });
         }
+    }
+    
+    public Transform GetObjectSpawnPoint()
+    {   
+        return _objectSpawnPoint; 
+    }
+    
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        _kitchenObject = kitchenObject;
+    }
+      
+    public KitchenObject GetKitchenObject()
+    {
+        return _kitchenObject;
+    }
+    
+    public void ClearKitchenObject()
+    {
+        _kitchenObject = null;
+    }
+    
+    public bool HasKitchenObject()
+    {
+        return _kitchenObject != null;        
     }
 }
