@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour, IKitchenObjectParent
+public class ClearCounter : BaseCounter, IKitchenObjectParent
 {
-    [SerializeField] private Transform _objectTransform;
-    [SerializeField] private Transform _objectSpawnPoint;
-    [SerializeField] private ClearCounter _secondClearCounter;
+    [SerializeField] private Transform _kitchenObjectTransform;
+    [SerializeField] private Transform _objectSpawnPoint; // TODO: We need to check we can get internaly without referencing
     
     private KitchenObject _kitchenObject;
 
-    
-    public void Interact(Player player)
+    public override void Interact(Player player)
     {
         if (_kitchenObject == null)
         {
-            Transform objectTransform = Instantiate(_objectTransform, _objectSpawnPoint);
+            Transform objectTransform = Instantiate(_kitchenObjectTransform, _objectSpawnPoint);
             objectTransform.GetComponent<KitchenObject>().SetParent(this);
         }
         else 

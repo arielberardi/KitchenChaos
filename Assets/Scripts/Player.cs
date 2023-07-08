@@ -17,12 +17,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public static Player Instance { get; private set; }
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
     
     private bool _isWalking = false;
     private Vector3 lastInteractDirection = Vector3.zero;
-    private ClearCounter _counterSelected;
+    private BaseCounter _counterSelected;
     private KitchenObject _kitchenObject;
 
     private void Awake() {
@@ -117,13 +117,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             _counterLayerMask
         );
         
-        ClearCounter clearCounter = null;
+        BaseCounter baseCounter = null;
         if (isInteracting) 
         {
-            raycastHit.transform.TryGetComponent(out clearCounter);
+            raycastHit.transform.TryGetComponent(out baseCounter);
         }
 
-        UpdateSelectedCounter(clearCounter);
+        UpdateSelectedCounter(baseCounter );
     }
     
     private bool GetIsCastIntercepted(Vector3 direction)
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         return new Vector3(inputVector.x, 0, inputVector.y).normalized;
     }
 
-    private void UpdateSelectedCounter(ClearCounter counterSelected)
+    private void UpdateSelectedCounter(BaseCounter counterSelected)
     {
         if (_counterSelected == counterSelected)
         {
