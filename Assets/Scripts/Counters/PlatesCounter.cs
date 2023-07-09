@@ -3,46 +3,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatesCounter : BaseCounter
-{
-    [SerializeField] private KitchenObjectSO _plateKitchenObjectSO;
-    [SerializeField] private float _spawnPlateSpeed = 4.0f;
-    [SerializeField] private int _maxSpawnedPlates = 4;
-    
+public class PlatesCounter : BaseCounter {
+
+
     public event EventHandler OnPlateSpawned;
     public event EventHandler OnPlateRemoved;
 
-    private float _spawnPlatesTimer = 0f;
-    private int _spawnedPlatesCount = 0;
-    
-    private void Update()
-    {
-        _spawnPlatesTimer += Time.deltaTime;
-        
-        if (_spawnPlatesTimer >= _spawnPlateSpeed)        
-        {
-            _spawnPlatesTimer = 0;
-                
-            if (_spawnedPlatesCount < _maxSpawnedPlates)
-            {
-                _spawnedPlatesCount++;
+
+    [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
+
+
+    private float spawnPlateTimer;
+    private float spawnPlateTimerMax = 4f;
+    private int platesSpawnedAmount;
+    private int platesSpawnedAmountMax = 4;
+
+
+    private void Update() {
+        spawnPlateTimer += Time.deltaTime;
+        if (spawnPlateTimer > spawnPlateTimerMax) {
+            spawnPlateTimer = 0f;
+
+            if (platesSpawnedAmount < platesSpawnedAmountMax) {
+                platesSpawnedAmount++;
+
                 OnPlateSpawned?.Invoke(this, EventArgs.Empty);
             }
         }
     }
 
-    public override void Interact(Player player)
-    {
-        if (!player.HasKitchenObject())
-        {
-            if (_spawnedPlatesCount > 0)
-            {
-                _spawnedPlatesCount--;
+    public override void Interact(Player player) {
+        if (!player.HasKitchenObject()) {
+            // Player is empty handed
+            if (platesSpawnedAmount > 0) {
+                // There's at least one plate here
+                platesSpawnedAmount--;
 
-                KitchenObject.SpawnKitchenObject(_plateKitchenObjectSO, player);
-                
+                KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);
+
                 OnPlateRemoved?.Invoke(this, EventArgs.Empty);
             }
         }
     }
+
 }
