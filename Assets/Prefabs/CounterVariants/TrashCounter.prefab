@@ -109,6 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d36ed7f3d12c43149396024fe60673c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectSpawnPoint: {fileID: 4334783258946885716}
+--- !u!4 &4334783258946885716 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4430714280642307574, guid: f8d7871786c5f4da8b828c61c873cfb4,
+    type: 3}
+  m_PrefabInstance: {fileID: 96037124603231650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6729475509817818883
 PrefabInstance:
   m_ObjectHideFlags: 0
